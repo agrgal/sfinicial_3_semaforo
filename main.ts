@@ -19,7 +19,11 @@ function encender (deColor: string, tempo: number) {
         parpadeo(cadencia, tempo)
     } else if (deColor == "rojo") {
         pins.digitalWritePin(DigitalPin.P4, 1)
-        basic.pause(tempo * 1000)
+        for (let j = 0; j <= tempo * 10; j++) {
+            music.ringTone(262)
+            basic.pause(100)
+            music.rest(music.beat(BeatFraction.Sixteenth))
+        }
     }
 }
 function apagado () {
