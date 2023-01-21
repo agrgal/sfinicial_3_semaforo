@@ -7,8 +7,14 @@ function parpadeo (cad: number, tiempo: number) {
 function encender (deColor: string, tempo: number) {
     apagado()
     if (deColor == "verde") {
-        pins.digitalWritePin(DigitalPin.P2, 1)
-        basic.pause(tempo * 1000)
+        for (let j = 0; j <= tempo * 100; j++) {
+            basic.pause(10)
+            if (pins.digitalReadPin(DigitalPin.P5) == 1) {
+                pins.digitalWritePin(DigitalPin.P2, 1)
+            } else {
+                j = tempo * 100
+            }
+        }
     } else if (deColor == "amarillo") {
         parpadeo(cadencia, tempo)
     } else if (deColor == "rojo") {
@@ -24,7 +30,7 @@ function apagado () {
 let cadencia = 0
 led.enable(false)
 let colores = ["verde", "amarillo", "rojo"]
-let ts = [3, 2, 2]
+let ts = [10, 4, 12]
 let estados = 2
 // milisegundos
 cadencia = 200
